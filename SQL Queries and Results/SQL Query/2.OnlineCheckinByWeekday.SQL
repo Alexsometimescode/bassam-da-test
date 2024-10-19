@@ -11,7 +11,7 @@ SELECT
 FROM 
     reservations res
 WHERE 
-    res.IsOnlineCheckin = 1  -- Only count reservations with online check-in
+    res.IsOnlineCheckin = 1 
 GROUP BY 
     Weekday, res.IsOnlineCheckin, res.AgeGroup, res.Gender, res.NationalityCode
 ORDER BY 

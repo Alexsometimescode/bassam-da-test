@@ -2,17 +2,17 @@ DROP VIEW IF EXISTS EstimatedOnlineRevenue;
 
 CREATE VIEW EstimatedOnlineRevenue AS
 SELECT 
-    DAYNAME(res.CreatedUtc) AS Weekday,  -- Extract day of the week (e.g., Monday)
+    DAYNAME(res.CreatedUtc) AS Weekday,  
     ROUND(SUM(CASE 
                 WHEN res.IsOnlineCheckin = 1 
-                THEN res.NightCost_Sum  -- Only sum room costs for reservations with online check-in
+                THEN res.NightCost_Sum  
                 ELSE 0 
-              END), 1) AS CurrentRevenue,  -- Current total revenue for online check-ins
+              END), 1) AS CurrentRevenue,  
     ROUND(SUM(CASE 
                 WHEN res.IsOnlineCheckin = 1 
-                THEN res.NightCost_Sum * 2  -- Apply the multiplier of 2 for online check-ins
+                THEN res.NightCost_Sum * 2  
                 ELSE 0
-              END), 1) AS EstimatedRevenue  -- Estimated revenue with doubled online check-ins
+              END), 1) AS EstimatedRevenue  
 FROM 
     reservations res
 GROUP BY 
